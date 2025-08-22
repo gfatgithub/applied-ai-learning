@@ -189,30 +189,71 @@ Ask the group:
 
 ---
 
-## 🤖 Agentic AI  
+## 🤖 Agentic AI (10 minutes)
 
-**Plain English Explanation**  
-Agentic AI means giving AI the ability to take actions, not just answer questions. It combines memory, tools, planning, and execution.  
+### 1. What is Agentic AI? (2 minutes)
+Agentic AI is AI that can **act with autonomy**. Instead of only answering questions, it can:  
+- **Plan**: Decide next steps toward a goal.  
+- **Use tools**: Call calculators, APIs, or databases.  
+- **Leverage memory**: Recall past inputs or conversations.  
+- **Execute tasks**: Chain steps together automatically.  
 
-**Analogy**  
-Imagine a **junior engineer with a task list**: instead of only answering your questions, they open tools, check data, and send reports back.  
+**Definition:**  
+Agentic AI combines **reasoning, memory, and tool use** so the AI can **learn from context, plan actions, and adapt** — like a junior engineer who doesn’t just reply but takes initiative.
 
-**Workplace Example**  
-An AI agent could automatically pull server metrics, compare them to thresholds, and alert the team via Slack.  
+---
 
-**Mini Demo (ASCII n8n Flow)**  
+### 2. Analogy (1 minute)  
+Think of giving a new team member a problem:  
+- A **regular AI** is like someone who answers your question and stops.  
+- An **agentic AI** is like someone who answers, then **uses a calculator, checks past notes, and sends you a full report**.
+
+---
+
+### 3. Workplace Example (2 minutes)  
+- IT: AI checks logs, runs diagnostics, and alerts teams.  
+- Business: AI drafts reports, queries a database, and emails results.  
+
+---
+
+### 4. Demo Workflows in n8n (3 minutes)  
+
+**a) AI Agent with Tool (Calculator)**  
 ~~~ascii
-[Trigger: Daily 9am] --> [Node: API call "Server Stats"]
-       |--> [Node: Compare vs Thresholds]
-       |--> [Node: Slack Message "Alerts"]
+[Manual Trigger] → [Edit Fields] → [AI Agent]
+       |-- Chat Model: OpenAI
+       |-- Tool: Calculator
 ~~~
+💡 Demo: Ask "What’s 25 × 17?" → The agent **uses the calculator** → Returns result.  
 
-**Pitfalls & Safeguards**  
-- Pitfall: Infinite loops if not scoped.  
-- Safeguard: Define clear limits (timeouts, retries).  
+**b) ChatGPT with and without Memory**  
+~~~ascii
+[When message received] → [ChatGPT - No Memory]  
+                         → [ChatGPT - With Memory + DB]
+~~~
+💡 Demo:  
+- *No Memory*: Forgets prior chats once session ends.  
+- *With Memory*: Recalls earlier inputs (via external DB).  
 
-**Summary + Action Item**  
-Agentic AI enables automation beyond Q&A. Action: Explore n8n or workflow tools to test one small agent task.  
+This shows **context = short-term scratchpad**, while **memory = long-term filing cabinet**.  
+
+---
+
+### 5. Pitfalls & Safeguards (1 minute)  
+- **Pitfalls**:  
+  - Infinite loops if not scoped.  
+  - Wrong tool usage if instructions are unclear.  
+  - Memory can introduce errors if data is outdated.  
+- **Safeguards**:  
+  - Define boundaries (timeouts, retries).  
+  - Validate outputs before action.  
+  - Set rules for memory updates.  
+
+---
+
+### 6. Summary + Action Item (1 minute)  
+Agentic AI enables **autonomy, memory, and tool use** — letting AI act, not just respond.  
+**Action:** Try an n8n workflow where the AI uses a tool or remembers past chats, starting with a small, safe task.  
 
 ---
 
