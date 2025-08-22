@@ -257,38 +257,85 @@ Agentic AI enables **autonomy, memory, and tool use** — letting AI act, not ju
 
 ---
 
-## 📝 Prompt Engineering  
+## 📝 Prompt Engineering (15 minutes)
 
-**Plain English Explanation**  
-Prompt engineering is the art of asking AI the right way. Better prompts = better answers.  
+### 1. What is Prompt Engineering? (2 minutes)  
+Prompt engineering is the practice of designing clear, structured instructions so AI systems generate useful, accurate, and relevant responses. The way you phrase a request directly shapes the quality of the answer.  
+
+---
+
+### 2. System vs User Prompts (3 minutes)  
+- **System Prompt**: Establishes the AI’s role, style, or boundaries.  
+  - Example: *"You are a helpful IT support assistant. Always respond concisely and professionally."*  
+- **User Prompt**: Represents the actual task or question from the user.  
+  - Example: *"Summarize the top 3 errors in this server log and suggest fixes."*  
 
 **Analogy**  
-It’s like **writing a ticket for IT support**: vague requests get vague solutions, but clear requests get clear fixes.  
+Think of the system prompt as the **job description**, and the user prompt as the **task request**.  
 
-**Workplace Example**  
-When debugging logs, instead of “What’s wrong?”, you could ask:  
-“Summarize top 3 error types in this 200-line log.”  
+---
 
-**Mini Demo (Bad vs Great Prompt)**  
+### 3. Structured Prompt Template (3 minutes)  
+A good structured prompt often contains four parts:  
+
 ~~~text
-Bad Prompt:
-"Explain logs."
+[System Prompt]  
+You are an expert [role]. Follow the instructions carefully.  
 
-Great Prompt:
-"Summarize top 3 repeated errors from this 200-line log, and suggest 1 fix for each."
+[Context]  
+Here is the background information you need to consider.  
+
+[Task / User Request]  
+Do X, Y, and Z with this input.  
+
+[Output Format]  
+Respond in JSON with fields "summary" and "recommendations".
 ~~~
 
-**Exercise**  
-Rewrite this bad prompt:  
-“Write something about cloud.”  
-→ Try making it specific, technical, and scoped.  
+---
 
-**Pitfalls & Safeguards**  
-- Pitfall: Overloading prompts with too much at once.  
-- Safeguard: Break tasks into smaller steps.  
+### 4. Demo: Bad vs Good Prompt with ChatGPT (4 minutes)  
 
-**Summary + Action Item**  
-Good prompts drive clarity. Action: Practice rewriting vague instructions into precise ones.  
+**Bad Prompt Example**  
+~~~text
+"Explain logs."
+~~~
+
+**ChatGPT Result (likely vague):**  
+*"These logs contain information about errors and processes that occurred on the system."*  
+
+---
+
+**Good Prompt Example**  
+~~~text
+System: "You are a log analysis assistant. Always be concise."  
+User: "Summarize the top 3 repeated errors from this 200-line server log and suggest one fix for each."  
+~~~
+
+**ChatGPT Result (clear and actionable):**  
+- Error 1: Database timeout (repeated 45 times) → Fix: Increase connection pool size.  
+- Error 2: Disk space warning (30 times) → Fix: Add monitoring + cleanup scripts.  
+- Error 3: Authentication failure (18 times) → Fix: Reset expired API keys.  
+
+---
+
+### 5. Exercise (2 minutes)  
+Take this vague prompt:  
+*"Write something about cloud."*  
+Rewrite it into a precise, scoped request with context and desired output format.  
+
+---
+
+### 6. Pitfalls & Safeguards (1 minute)  
+- **Pitfall**: Overloading prompts with multiple unrelated tasks.  
+- **Safeguard**: Break complex jobs into smaller steps.  
+
+---
+
+### 7. Summary + Action Item (1 minute)  
+Prompts shape AI output quality.  
+**Action:** Always pair a **system prompt** for consistency with a **clear user prompt** for the actual task, and structure them with context + output requirements.  
+
 
 ---
 
