@@ -27,7 +27,7 @@ By the end of this session, you will be able to:
 ### 1. What is an LLM? (2 minutes)
 Large Language Models (LLMs) are programs trained on massive text data.  
 They work by predicting the **next token** (a chunk of text) based on what came before.  
-They are not databases; they are probability engines.  
+They are not databases; they are **probability** engines.  
 
 **Analogy:** An LLM is like a **supercharged autocomplete**.  
 Where your phone finishes "How are …" with "you?", an LLM can draft full reports, troubleshoot logs, or generate code.
