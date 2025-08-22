@@ -22,29 +22,170 @@ By the end of this session, you will be able to:
 
 ---
 
-## 🧠 Introduction to LLMs  
+## 🧠 Introduction to LLMs (15 minutes)
 
-**Plain English Explanation**  
-Large Language Models (LLMs) are computer programs trained on massive amounts of text. They predict the next word in a sentence, allowing them to generate human-like answers, summaries, or even code.  
+### 1. What is an LLM? (2 minutes)
+Large Language Models (LLMs) are programs trained on massive text data.  
+They work by predicting the **next token** (a chunk of text) based on what came before.  
+They are not databases; they are probability engines.  
 
-**Analogy**  
-Think of an LLM like an **auto-complete on steroids**: instead of just finishing your text messages, it can complete reports, troubleshoot logs, or answer technical questions.  
+**Analogy:** An LLM is like a **supercharged autocomplete**.  
+Where your phone finishes "How are …" with "you?", an LLM can draft full reports, troubleshoot logs, or generate code.
 
-**Workplace Example**  
-Engineers can use an LLM to summarize long system logs into a concise error report.  
+---
 
-**Mini Demo (ASCII)**  
+### 2. Tokens: The LEGO Bricks of Language (5 minutes)
+LLMs don’t process whole words directly. They use **tokens** — small pieces of text.  
+- A token ≈ 3–4 characters in English on average.  
+- "Automation" → might split into: ["Auto", "mation"]  
+
+**Mini Demo: Tokenization**
 ~~~text
-User: Summarize system error log
-AI: "Disk I/O bottleneck detected at node 3. Recommend workload balancing."
+Input: "The quick brown fox jumps"
+Tokenized: ["The", " quick", " brown", " fox", " jumps"]
 ~~~
 
-**Pitfalls & Safeguards**  
-- Pitfall: Treating AI output as always correct.  
-- Safeguard: Validate results with source data.  
+**Live Demo with ChatGPT**
+Ask the model:  
+~~~text
+Split the sentence "The quick brown fox jumps over the lazy dog." into tokens.
+Also tell me how many tokens are in it.
+~~~
 
-**Summary + Action Item**  
-LLMs are powerful text assistants. Action: Try using them for summarizing logs or generating technical documentation.  
+Expected output (approximate):  
+- Tokens: ["The", " quick", " brown", " fox", " jumps", " over", " the", " lazy", " dog", "."]  
+- Count: 10 tokens  
+
+This demonstrates that LLMs “see” **chunks**, not whole sentences.
+
+**Why tokens matter:**
+- **Costs** → Every token is like a **text message fee**.  
+  - Example: GPT-4o costs ~$0.005 per 1,000 tokens (input + output).  
+  - 1,000 tokens ≈ 750 words (~1 page).  
+  - So, a 10-page input + 2-page output = ~12,000 tokens = ~$0.06 per run.  
+  - At scale, costs accumulate quickly.  
+- **Limits** → Tokens define the **maximum conversation size**.  
+  - Think of tokens as **lines on a whiteboard**.  
+  - A 4k-token model = ~6 pages.  
+  - A 32k-token model = ~50 pages.  
+  - A 200k-token model = ~300 pages.  
+
+**Analogy:** Tokens are **LEGO bricks** of language.  
+The LLM doesn’t see paragraphs — it builds text piece by piece.
+
+---
+
+### 3. How LLMs Work: ASCII Pipeline (2 minutes)
+~~~ascii
+User Input
+   |
+   v
++-------------------+
+|   Tokenizer       | -> Splits text into tokens
++-------------------+
+   |
+   v
++-------------------+
+|   LLM Engine      | -> Predicts next token
+|   (probabilities) |
++-------------------+
+   |
+   v
++-------------------+
+|   Detokenizer     | -> Reassembles tokens into text
++-------------------+
+   |
+   v
+AI Output
+~~~
+
+---
+
+### 4. Context Window: The Whiteboard (3 minutes)
+Each LLM has a **context window** — the maximum tokens it can “see” at once.  
+- Small models: ~4k tokens (~6 pages).  
+- Medium models: 32k (~50 pages).  
+- Largest models: 200k (~300 pages).  
+
+**Analogy:** The context window = **whiteboard size**.  
+- Small whiteboard → you erase often.  
+- Big whiteboard → you can keep more notes.  
+
+**Live Demo: Overload Context**
+1. Paste a huge block of text (e.g., many pages of repeated words).  
+2. Ask:  
+   ~~~text
+   At the very beginning of this text, I wrote a secret phrase. What was it?
+   ~~~  
+3. If the text exceeds the context window, the model forgets the start.  
+→ Shows the model doesn’t truly “remember”; it only works with what fits on the board.
+
+---
+
+### 5. Context vs Memory (2 minutes)
+- **Context** = temporary, session-based info in the whiteboard.  
+- **Memory** = long-term recall across sessions (requires external DB).  
+
+**ASCII Visual**
+~~~ascii
+[ Context Window = Whiteboard ]
++--------------------------------+
+| Things written now             |
+| (recent messages, data)        |
++--------------------------------+
+   |
+   v
+Erased once full
+
+[ Memory = Filing Cabinet ]
++--------------------------------+
+| Stored across sessions         |
+| Requires external DB/system    |
++--------------------------------+
+~~~
+
+**Mini Demo: Session Recall**
+1. Say:  
+   ~~~text
+   Remember this phrase: ZEBRA-42
+   ~~~  
+2. Ask in the same chat:  
+   ~~~text
+   What phrase did I ask you to remember?
+   ~~~  
+   → Works (short-term context).  
+3. Ask in a **new chat**:  
+   ~~~text
+   What phrase did I ask you to remember in the other chat?
+   ~~~  
+   → No recall unless explicit memory features are enabled.  
+
+---
+
+### 6. Capabilities & Limitations (2 minutes)
+**Capabilities:** Summarization, Q&A, translation, coding, report generation.  
+**Limitations:**  
+- **Hallucination**: Makes up facts with confidence.  
+- **Bias**: Reflects flaws in training data.  
+- **Context bound**: Can’t exceed window size.  
+- **No innate long-term memory**: Needs scaffolding for persistence.  
+
+---
+
+### 7. Wrap-Up Exercise (2 minutes)
+Ask the group:  
+- *“If an LLM can only see 32k tokens (~50 pages), how would you process a 500-page technical manual?”*  
+(Hints: split into chunks, summarize each, use retrieval augmentation.)  
+
+---
+
+### ✅ Summary + Action Items
+- LLMs process **tokens**, not whole words.  
+- **Costs scale with tokens** — every input and output has a price.  
+- **Context window** = whiteboard size → finite.  
+- **Memory** = external filing cabinet; not built in.  
+- Demos show both **tokenization** and **context limits**.  
+- Action: Always **chunk large data, track token usage, and validate outputs**.
 
 ---
 
