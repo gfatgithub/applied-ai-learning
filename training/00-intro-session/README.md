@@ -383,7 +383,8 @@ Balance accuracy vs cost. Action: Decide when you need quick vs detailed answers
 1. [OpenAI – How LLMs Work](https://platform.openai.com/docs)  
 2. [n8n Documentation](https://docs.n8n.io)  
 3. [Stanford – Introduction to LLMs](https://web.stanford.edu/~jurafsky/slp3/)  
-4. [Anthropic on Test-Time Compute](https://www.anthropic.com)  
+4. [Anthropic on Test-Time Compute](https://www.anthropic.com)
+5. [What is test-time compute and how to scale it?](https://huggingface.co/blog/Kseniase/testtimecompute)
 
 ---
 
